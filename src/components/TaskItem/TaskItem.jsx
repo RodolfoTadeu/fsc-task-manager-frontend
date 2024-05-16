@@ -3,7 +3,7 @@ export const TaskItem = ({ id, description, isCompleted }) => {
     <>
       <span>{id}</span>
       <p>{description}</p>
-      <p>{isCompleted ? "Finalizada" : "Pendente"}</p>
+      {/* <p>{isCompleted ? "Finalizada" : "Pendente"}</p> */}
     </>
   );
 };
