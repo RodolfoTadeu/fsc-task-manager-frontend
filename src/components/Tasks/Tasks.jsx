@@ -31,10 +31,8 @@ export const Task = () => {
           {tasks
             .filter((task) => task.isCompleted === false)
             .map((lastTask) => (
-              <TaskItem id={lastTask.id} description={lastTask.description} />
+              <TaskItem task={lastTask} />
             ))}
-          {/* {console.log("TT", tasks)} */}
-          {/* {tasks.filter((tasks) => tasks.isCompleted === false)} */}
         </div>
       </div>
 
@@ -44,17 +42,10 @@ export const Task = () => {
           {tasks
             .filter((task) => task.isCompleted)
             .map((completedTask) => (
-              <p>{completedTask.description}</p>
+              <TaskItem task={completedTask} />
             ))}
         </div>
       </div>
-      {/* {tasks.map((task) => (
-        <TaskItem
-          id={task.id}
-          description={task.description}
-          isCompleted={task.isCompleted}
-        />
-      ))} */}
     </div>
   );
 };

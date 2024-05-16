@@ -1,9 +1,9 @@
-export const TaskItem = ({ id, description, isCompleted }) => {
+export const TaskItem = ({ task }) => {
   return (
     <>
-      <span>{id}</span>
-      <p>{description}</p>
-      {/* <p>{isCompleted ? "Finalizada" : "Pendente"}</p> */}
+      <span>{task.id}</span>
+      <h1>{task.description}</h1>
+      <p>{task.isCompleted ? "Finalizada" : "Pendente"}</p>
     </>
   );
 };
