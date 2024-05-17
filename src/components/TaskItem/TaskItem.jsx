@@ -2,7 +2,11 @@ import "./TaskItem.scss";
 
 import { AiFillDelete } from "react-icons/ai";
 
-export const TaskItem = ({ task, deleteTask }) => {
+export const TaskItem = ({
+  task,
+  deleteTask,
+  handleTaskCompletionOnChange,
+}) => {
   return (
     <div className="task-item-container">
       <div className="task-description">
@@ -14,7 +18,11 @@ export const TaskItem = ({ task, deleteTask }) => {
           }
         >
           {task.description}
-          <input type="checkbox" defaultChecked={task.isCompleted} />
+          <input
+            type="checkbox"
+            defaultChecked={task.isCompleted}
+            onChange={(e) => handleTaskCompletionOnChange(task._id, e)}
+          />
           <span
             className={task.isCompleted ? "checkmark completed" : "checkmark"}
           ></span>

@@ -31,6 +31,17 @@ export const Task = () => {
     }
   };
 
+  const handleTaskCompletionOnChange = async (id, e) => {
+    try {
+      await axios.patch(`http://localhost:8000/tasks/${id}`, {
+        isCompleted: e.target.checked,
+      });
+      await fetchTasks();
+    } catch (error) {
+      console.log("Error", error);
+    }
+  };
+
   return (
     <div className="tasks-container">
       <h2>Minhas tarefas</h2>
@@ -42,7 +53,11 @@ export const Task = () => {
           {tasks
             .filter((task) => task.isCompleted === false)
             .map((lastTask) => (
-              <TaskItem task={lastTask} deleteTask={deleteTask} />
+              <TaskItem
+                task={lastTask}
+                deleteTask={deleteTask}
+                handleTaskCompletionOnChange={handleTaskCompletionOnChange}
+              />
             ))}
         </div>
       </div>
