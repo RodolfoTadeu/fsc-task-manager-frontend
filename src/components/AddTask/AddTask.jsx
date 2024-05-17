@@ -6,7 +6,7 @@ import "./AddTask.scss";
 import { CustomButton } from "../CustomButton/CustomButton";
 import axios from "axios";
 
-export const AddTask = ({ setErrorMessage }) => {
+export const AddTask = ({ fetchTasks, setErrorMessage }) => {
   const [task, setTask] = useState("");
 
   const onChange = (e) => {
@@ -26,7 +26,12 @@ export const AddTask = ({ setErrorMessage }) => {
         description: task,
         isCompleted: false,
       });
-    } catch (error) {}
+
+      await fetchTasks();
+      setTask("");
+    } catch (error) {
+      setErrorMessage("Algo deu errado.");
+    }
   };
 
   return (

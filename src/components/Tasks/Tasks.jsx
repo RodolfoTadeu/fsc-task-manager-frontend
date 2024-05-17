@@ -27,7 +27,7 @@ export const Task = () => {
       <h2>Minhas tarefas</h2>
       <div className="last-tasks">
         <h3>Últimas tarefas</h3>
-        <AddTask setErrorMessage={setErrorMessage} />
+        <AddTask setErrorMessage={setErrorMessage} fetchTasks={fetchTasks} />
         <p className="error-message">{errorMessage}</p>
         <div className="tasks-list">
           {tasks
