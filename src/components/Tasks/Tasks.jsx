@@ -22,6 +22,15 @@ export const Task = () => {
     fetchTasks();
   }, []);
 
+  const deleteTask = async (id) => {
+    try {
+      await axios.delete(`http://localhost:8000/tasks/${id}`);
+      await fetchTasks();
+    } catch (error) {
+      console.log("ERROR", error);
+    }
+  };
+
   return (
     <div className="tasks-container">
       <h2>Minhas tarefas</h2>
@@ -33,7 +42,7 @@ export const Task = () => {
           {tasks
             .filter((task) => task.isCompleted === false)
             .map((lastTask) => (
-              <TaskItem task={lastTask} />
+              <TaskItem task={lastTask} deleteTask={deleteTask} />
             ))}
         </div>
       </div>

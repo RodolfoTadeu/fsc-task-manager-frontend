@@ -2,7 +2,7 @@ import "./TaskItem.scss";
 
 import { AiFillDelete } from "react-icons/ai";
 
-export const TaskItem = ({ task }) => {
+export const TaskItem = ({ task, deleteTask }) => {
   return (
     <div className="task-item-container">
       <div className="task-description">
@@ -22,7 +22,11 @@ export const TaskItem = ({ task }) => {
       </div>
 
       <div className="delete">
-        <AiFillDelete size={18} color="#F97474" />
+        <AiFillDelete
+          size={18}
+          color="#F97474"
+          onClick={() => deleteTask(task._id)}
+        />
       </div>
     </div>
   );
