@@ -20,6 +20,7 @@ export const AddTask = ({ fetchTasks, setErrorMessage }) => {
         setErrorMessage(
           "A tarefa precisa de uma descrição para ser adicionada"
         );
+        return;
       }
 
       await axios.post("http://localhost:8000/tasks", {
@@ -40,6 +41,8 @@ export const AddTask = ({ fetchTasks, setErrorMessage }) => {
         label="Adicionar tarefa..."
         value={task}
         onChange={onChange}
+        onEnterPress={handleTaskAddition}
+        setErrorMessage={setErrorMessage}
       />
       <CustomButton onClick={handleTaskAddition}>
         <FaPlus size={14} color="#ffffff" />
