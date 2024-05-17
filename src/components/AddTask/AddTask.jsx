@@ -4,6 +4,7 @@ import { FaPlus } from "react-icons/fa";
 import { CustomInput } from "../CustomInput/CustomInput";
 import "./AddTask.scss";
 import { CustomButton } from "../CustomButton/CustomButton";
+import axios from "axios";
 
 export const AddTask = ({ setErrorMessage }) => {
   const [task, setTask] = useState("");
@@ -20,6 +21,11 @@ export const AddTask = ({ setErrorMessage }) => {
           "A tarefa precisa de uma descrição para ser adicionada"
         );
       }
+
+      await axios.post("http://localhost:8000/tasks", {
+        description: task,
+        isCompleted: false,
+      });
     } catch (error) {}
   };
 

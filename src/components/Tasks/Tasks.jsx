@@ -7,8 +7,7 @@ import { AddTask } from "../AddTask/AddTask";
 
 export const Task = () => {
   const [tasks, setTasks] = useState([]);
-
-  console.log("TASKS ==>", tasks);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const fetchTasks = async () => {
     try {
@@ -28,7 +27,8 @@ export const Task = () => {
       <h2>Minhas tarefas</h2>
       <div className="last-tasks">
         <h3>Últimas tarefas</h3>
-        <AddTask />
+        <AddTask setErrorMessage={setErrorMessage} />
+        <p className="error-message">{errorMessage}</p>
         <div className="tasks-list">
           {tasks
             .filter((task) => task.isCompleted === false)
