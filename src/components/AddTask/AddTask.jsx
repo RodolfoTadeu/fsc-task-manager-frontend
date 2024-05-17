@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { FaPlus } from "react-icons/fa";
+
 import { CustomInput } from "../CustomInput/CustomInput";
 import "./AddTask.scss";
+import { CustomButton } from "../CustomButton/CustomButton";
 
 export const AddTask = () => {
   const [task, setTask] = useState("");
@@ -15,6 +18,9 @@ export const AddTask = () => {
         value={task}
         onChange={onChange}
       />
+      <CustomButton>
+        <FaPlus size={14} color="#ffffff" />
+      </CustomButton>
     </div>
   );
 };
