@@ -54,6 +54,7 @@ export const Task = () => {
             .filter((task) => task.isCompleted === false)
             .map((lastTask) => (
               <TaskItem
+                key={lastTask._id}
                 task={lastTask}
                 deleteTask={deleteTask}
                 handleTaskCompletionOnChange={handleTaskCompletionOnChange}
@@ -68,7 +69,7 @@ export const Task = () => {
           {tasks
             .filter((task) => task.isCompleted)
             .map((completedTask) => (
-              <TaskItem task={completedTask} />
+              <TaskItem key={completedTask._id} task={completedTask} />
             ))}
         </div>
       </div>
