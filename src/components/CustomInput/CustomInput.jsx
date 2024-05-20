@@ -7,7 +7,6 @@ export const CustomInput = ({
   onEnterPress,
   setErrorMessage,
 }) => {
-  console.log("Value", value.length);
   const handleKeyDown = (e) => {
     if (value.length > 0 && e.key === "Enter") {
       onEnterPress();

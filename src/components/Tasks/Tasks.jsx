@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./Tasks.scss";
 
@@ -14,9 +14,19 @@ export const Task = () => {
       const { data } = await axios.get("http://localhost:8000/tasks");
       setTasks(data);
     } catch (error) {
-      console.log(error);
+      console.log("Error", error);
     }
   };
+
+  const lastTasks = useMemo(() => {
+    console.log("lastTasks");
+    return tasks.filter((task) => task.isCompleted === false);
+  }, [tasks]);
+
+  const completedTasks = useMemo(() => {
+    console.log("completedTasks");
+    return tasks.filter((task) => task.isCompleted === true);
+  }, [tasks]);
 
   useEffect(() => {
     fetchTasks();
@@ -50,27 +60,23 @@ export const Task = () => {
         <AddTask setErrorMessage={setErrorMessage} fetchTasks={fetchTasks} />
         <p className="error-message">{errorMessage}</p>
         <div className="tasks-list">
-          {tasks
-            .filter((task) => task.isCompleted === false)
-            .map((lastTask) => (
-              <TaskItem
-                key={lastTask._id}
-                task={lastTask}
-                deleteTask={deleteTask}
-                handleTaskCompletionOnChange={handleTaskCompletionOnChange}
-              />
-            ))}
+          {lastTasks.map((lastTask) => (
+            <TaskItem
+              key={lastTask._id}
+              task={lastTask}
+              deleteTask={deleteTask}
+              handleTaskCompletionOnChange={handleTaskCompletionOnChange}
+            />
+          ))}
         </div>
       </div>
 
       <div className="completed-tasks">
         <h3>Tarefas Concluídas</h3>
         <div className="tasks-list">
-          {tasks
-            .filter((task) => task.isCompleted)
-            .map((completedTask) => (
-              <TaskItem key={completedTask._id} task={completedTask} />
-            ))}
+          {completedTasks.map((completedTask) => (
+            <TaskItem key={completedTask._id} task={completedTask} />
+          ))}
         </div>
       </div>
     </div>
