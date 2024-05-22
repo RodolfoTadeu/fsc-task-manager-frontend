@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import "./Tasks.scss";
 
@@ -9,14 +9,14 @@ export const Task = () => {
   const [tasks, setTasks] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const { data } = await axios.get("http://localhost:8000/tasks");
       setTasks(data);
     } catch (error) {
       console.log("Error", error);
     }
-  };
+  }, []);
 
   const lastTasks = useMemo(() => {
     console.log("lastTasks");
@@ -30,7 +30,7 @@ export const Task = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
 
   const deleteTask = async (id) => {
     try {
