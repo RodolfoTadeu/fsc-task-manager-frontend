@@ -1,52 +1,50 @@
-import { useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { useState } from 'react'
+import { FaPlus } from 'react-icons/fa'
 
-import { CustomInput } from "../CustomInput/CustomInput";
-import "./AddTask.scss";
-import { CustomButton } from "../CustomButton/CustomButton";
-import axios from "axios";
+import { CustomInput } from '../CustomInput/CustomInput'
+import './AddTask.scss'
+import { CustomButton } from '../CustomButton/CustomButton'
+import axios from 'axios'
 
 export const AddTask = ({ fetchTasks, setErrorMessage }) => {
-  const [task, setTask] = useState("");
+  const [task, setTask] = useState('')
 
   const onChange = (e) => {
-    setTask(e.target.value);
-    setErrorMessage("");
-  };
+    setTask(e.target.value)
+    setErrorMessage('')
+  }
 
   const handleTaskAddition = async () => {
     try {
       if (task.length === 0) {
-        setErrorMessage(
-          "A tarefa precisa de uma descrição para ser adicionada"
-        );
-        return;
+        setErrorMessage('A tarefa precisa de uma descrição para ser adicionada')
+        return
       }
 
-      await axios.post("http://localhost:8000/tasks", {
+      await axios.post('http://localhost:8000/tasks', {
         description: task,
-        isCompleted: false,
-      });
+        isCompleted: false
+      })
 
-      await fetchTasks();
-      setTask("");
+      await fetchTasks()
+      setTask('')
     } catch (error) {
-      setErrorMessage("Algo deu errado.");
+      setErrorMessage('Algo deu errado.')
     }
-  };
+  }
 
   return (
-    <div className="add-task-container">
+    <div className='add-task-container'>
       <CustomInput
-        label="Adicionar tarefa..."
+        label='Adicionar tarefa...'
         value={task}
         onChange={onChange}
         onEnterPress={handleTaskAddition}
         setErrorMessage={setErrorMessage}
       />
       <CustomButton onClick={handleTaskAddition}>
-        <FaPlus size={14} color="#ffffff" />
+        <FaPlus size={14} color='#ffffff' />
       </CustomButton>
     </div>
-  );
-};
+  )
+}
